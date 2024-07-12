@@ -1,0 +1,47 @@
+.home-header-container{
+    height: 60px;
+    width: 100%;
+    padding: 0 20px;
+    .home-header-content{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        .left-content{
+           
+            width: 25%;
+            display: flex;
+            align-items: center;
+            .header-logo{
+                background: url('../../assets/logo.svg') center center no-repeat ;
+                height: 58px;
+                width: 100%;
+                cursor: pointer;
+            }
+            i{
+                font-size: 25px;
+                cursor: pointer;
+                color:grey;
+            }
+        } 
+        .center-content{
+           
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .child-content{
+                .sub-title{
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+            }
+        }
+        .right-content{
+           
+            width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
