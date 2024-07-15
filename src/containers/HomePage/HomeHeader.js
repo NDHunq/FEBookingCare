@@ -72,8 +72,7 @@ class HomeHeader extends Component {
                   language === LANGUAGES.VI
                     ? "language-vi active"
                     : "language-vi"
-                }
-              >
+                }>
                 <span onClick={() => this.changeLanguage(LANGUAGES.VI)}>
                   VI
                 </span>
@@ -83,8 +82,7 @@ class HomeHeader extends Component {
                   language === LANGUAGES.EN
                     ? "language-en active"
                     : "language-en"
-                }
-              >
+                }>
                 <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>
                   EN
                 </span>
@@ -103,8 +101,7 @@ class HomeHeader extends Component {
                 <i className="fas fa-search"></i>
                 <input
                   type="text"
-                  placeholder="Tìm chuyên khoa khám bệnh"
-                ></input>
+                  placeholder="Tìm chuyên khoa khám bệnh"></input>
               </div>
             </div>
             <div className="content-down">
