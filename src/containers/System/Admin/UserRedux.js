@@ -1,12 +1,28 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
+import { LANGUAGES } from "../../../utils";
+import * as actions from "../../../store/actions";
 class UserRedux extends Component {
-  state = {};
-
-  componentDidMount() {}
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      genderArr: [],
+    };
+  }
+  async componentDidMount() {
+    this.props.getGenderStart();
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.genderRedux !== this.props.genderRedux) {
+      this.setState({
+        genderArr: this.props.genderRedux,
+      });
+    }
+  }
   render() {
+    let genders = this.state.genderArr;
+    let language = this.props.language;
     return (
       <div className="user-redux-container">
         <div className="title">USER REDUX</div>
@@ -57,7 +73,17 @@ class UserRedux extends Component {
                   <FormattedMessage id="manage-user.gender" />
                 </label>
                 <select className="form-control">
-                  <option>Chose...</option>
+                  {genders &&
+                    genders.length > 0 &&
+                    genders.map((item, index) => {
+                      return (
+                        <option key={index}>
+                          {language === LANGUAGES.VI
+                            ? item.valueVi
+                            : item.valueEn}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
               <div className="col-3">
@@ -96,11 +122,16 @@ class UserRedux extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+    genderRedux: state.admin.genders,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getGenderStart: () => dispatch(actions.fetchGenderStart()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRedux);
