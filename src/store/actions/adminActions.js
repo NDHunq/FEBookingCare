@@ -103,6 +103,7 @@ export const fetchAllUsersStart = () => {
   return async (dispatch, getState) => {
     try {
       let res = await getAllUsers("ALL");
+      console.log("fetchAllUserStart res", res);
       if (res && res.errCode === 0) {
         dispatch(fetchAllUsersSuccess(res.users.reverse()));
       } else {
@@ -152,16 +153,18 @@ export const editUser = (data) => {
   return async (dispatch, getState) => {
     try {
       let res = await editUserService(data);
+      console.log("editUser res", res);
+
       if (res && res.errCode === 0) {
         toast.success("Edit user success");
         dispatch(editUserSuccess());
         dispatch(fetchAllUsersStart());
       } else {
-        toast.error("Edit user failed");
+        toast.error("Edit user failed 1");
         dispatch(editUserFailed());
       }
     } catch (error) {
-      toast.error("Edit user failed");
+      toast.error("Edit user failed 2");
       dispatch(editUserFailed());
       console.log("editUser error", error);
     }
