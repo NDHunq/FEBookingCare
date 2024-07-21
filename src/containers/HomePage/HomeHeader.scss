@@ -1,48 +1,48 @@
 .home-header-container {
     width: 100%;
-    
+
     .home-header-content {
-        display: flex;
-        height: 100%;
-        width: 100%;
-        padding: 0 30px;
-        position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1000;
+        display         : flex;
+        height          : 100%;
+        width           : 100%;
+        padding         : 0 30px;
+        position        : sticky;
+        top             : 0;
+        background-color: white;
+        z-index         : 1000;
 
 
         .left-content {
 
-            width: 20%;
-            display: flex;
+            width      : 20%;
+            display    : flex;
             align-items: center;
 
             .header-logo {
-                height: 100%;
-                width: 100%;
-                cursor: pointer;
-                transform: scale(0.5, 0.5);
+                height     : 100%;
+                width      : 100%;
+                cursor     : pointer;
+                transform  : scale(0.5, 0.5);
                 margin-left: -50px;
             }
 
             i {
                 font-size: 25px;
-                cursor: pointer;
-                color: grey;
+                cursor   : pointer;
+                color    : grey;
             }
         }
 
         .center-content {
 
-            width: 55%;
-            display: flex;
-            align-items: center;
+            width          : 55%;
+            display        : flex;
+            align-items    : center;
             justify-content: space-between;
 
             .child-content {
                 .sub-title {
-                    font-size: 12px;
+                    font-size  : 12px;
                     font-weight: 400;
                 }
             }
@@ -50,19 +50,19 @@
 
         .right-content {
 
-            width: 25%;
-            display: flex;
-            align-items: center;
+            width          : 25%;
+            display        : flex;
+            align-items    : center;
             justify-content: flex-end;
 
             .support {
                 padding-right: 50px;
-                display: flex;
-                align-items: center;
-                cursor: pointer;
+                display      : flex;
+                align-items  : center;
+                cursor       : pointer;
 
                 i {
-                    font-size: 15px;
+                    font-size   : 15px;
                     margin-right: 5px;
 
                 }
@@ -70,8 +70,8 @@
 
             .language-vi {
                 margin-right: 15px;
-                cursor: pointer;
-                opacity: 0.2;
+                cursor      : pointer;
+                opacity     : 0.2;
 
                 &.active {
                     opacity: 1;
@@ -87,7 +87,7 @@
             }
 
             .language-en {
-                cursor: pointer;
+                cursor : pointer;
                 opacity: 0.2;
 
                 &.active {
@@ -106,43 +106,43 @@
     }
 
     .home-header-banner {
-        background-image: url('../../assets/header_background.jpg');
-        height: 485px;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-image   : url('../../assets/header_background.jpg');
+        height             : 485px;
+        background-repeat  : no-repeat;
+        background-size    : cover;
         background-position: center;
-        display: flex;
-        flex-direction: column;
+        display            : flex;
+        flex-direction     : column;
 
         .content-up {
             background-image: linear-gradient(rgba(126, 126, 126, 0.25), rgba(255, 255, 255, 0.1));
-            padding-top: 15px;
-            height: 65%;
+            padding-top     : 15px;
+            height          : 65%;
 
             .title1 {
-                text-align: center;
-                font-size: 30px;
-                color: white;
-                text-shadow: 1px 1px 1px #333;
-                margin-top: 30px;
+                text-align   : center;
+                font-size    : 30px;
+                color        : white;
+                text-shadow  : 1px 1px 1px #333;
+                margin-top   : 30px;
                 margin-bottom: 5px;
             }
 
             .title2 {
-                text-align: center;
-                font-size: 30px;
-                color: white;
-                text-shadow: 1px 1px 1px #333;
+                text-align   : center;
+                font-size    : 30px;
+                color        : white;
+                text-shadow  : 1px 1px 1px #333;
                 margin-bottom: 15px;
             }
 
             .search {
-                text-align: center;
-                background: #f7d800;
-                width: fit-content;
-                align-items: center;
-                margin: 0 auto;
-                padding: 10px;
+                text-align   : center;
+                background   : #f7d800;
+                width        : fit-content;
+                align-items  : center;
+                margin       : 0 auto;
+                padding      : 10px;
                 border-radius: 25px;
 
                 i {
@@ -151,49 +151,49 @@
 
                 input {
                     background: transparent;
-                    border: none;
-                    outline: none;
-                    height: 30px;
-                    width: 360px;
+                    border    : none;
+                    outline   : none;
+                    height    : 30px;
+                    width     : 360px;
                 }
             }
         }
 
         .content-down {
-            height: 35%;
-            padding-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
+            height          : 35%;
+            padding-bottom  : 10px;
+            display         : flex;
+            justify-content : center;
+            align-items     : flex-end;
             background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9));
 
             .option {
-                display: flex;
-                text-align: center;
+                display        : flex;
+                text-align     : center;
                 justify-content: center;
-                gap: 50px;
+                gap            : 50px;
 
                 .option-child {
                     width: 100px;
 
                     .icon-child {
-                        width: 40px;
-                        height: 40px;
-                        padding: 10px;
+                        width           : 40px;
+                        height          : 40px;
+                        padding         : 10px;
                         background-color: white;
-                        border-radius: 50%;
-                        margin: 0 auto;
+                        border-radius   : 50%;
+                        margin          : 0 auto;
 
                         i {
                             font-size: 20px;
-                            color: #49bce2;
+                            color    : #49bce2;
                         }
                     }
 
                     .text-child {
-                        font-size: 17px;
+                        font-size  : 17px;
                         font-weight: 500;
-                        cursor: pointer;
+                        cursor     : pointer;
 
                         &:hover {
                             color: #49bce2;
