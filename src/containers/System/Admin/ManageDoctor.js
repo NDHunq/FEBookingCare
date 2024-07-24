@@ -152,14 +152,47 @@ class ManageDoctor extends Component {
   };
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedOption });
+    let { listPayment, listPrice, listProvince } = this.state;
     let res = await getDetailInforDoctor(selectedOption.value);
     if (res && res.errCode === 0 && res.data && res.data.Markdown) {
       let markdown = res.data.Markdown;
+      let addressClinic = "",
+        nameClinic = "",
+        note = "",
+        selectedPayment = "",
+        selectedPrice = "",
+        selectedProvince = "",
+        paymentId = "",
+        priceId = "",
+        provinceId = "";
+      if (res.data.Doctor_infor) {
+        addressClinic = res.data.Doctor_infor.addressClinic;
+        nameClinic = res.data.Doctor_infor.nameClinic;
+        note = res.data.Doctor_infor.note;
+        paymentId = res.data.Doctor_infor.paymentId;
+        priceId = res.data.Doctor_infor.priceId;
+        provinceId = res.data.Doctor_infor.provinceId;
+        selectedPayment = listPayment.find((item) => {
+          return item && item.value === paymentId;
+        });
+        selectedPrice = listPrice.find((item) => {
+          return item && item.value === priceId;
+        });
+        selectedProvince = listProvince.find((item) => {
+          return item && item.value === provinceId;
+        });
+      }
       this.setState({
         contentMarkdown: markdown.contentMarkdown,
         contentHTML: markdown.contentHTML,
         description: markdown.Description,
         hasOldData: true,
+        nameClinic: nameClinic,
+        addressClinic: addressClinic,
+        note: note,
+        selectedPayment: selectedPayment,
+        selectedPrice: selectedPrice,
+        selectedProvince: selectedProvince,
       });
     } else {
       this.setState({
@@ -167,6 +200,9 @@ class ManageDoctor extends Component {
         contentHTML: "",
         description: "",
         hasOldData: false,
+        nameClinic: "",
+        addressClinic: "",
+        note: "",
       });
     }
   };
@@ -224,7 +260,7 @@ class ManageDoctor extends Component {
               value={this.state.description}></textarea>
           </div>
         </div>
-        <div className="more-infor-extra-now">
+        <div className="more-infor-extra row">
           <div className="col-4 form-group">
             <label>
               <FormattedMessage id="admin.manage-doctor.price" />
