@@ -16,20 +16,36 @@ class ManageDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //save markdown content
       contentMarkdown: "",
       contentHTML: "",
       selectedOption: "",
       description: "",
       listDoctors: [],
       hasOldData: false,
+
+      //save doctor_infor data
+      listPrice: [],
+      listPayment: [],
+      listProvince: [],
+      selectedPrice: "",
+      selectedPayment: "",
+      selectedProvince: "",
+      nameClinic: "",
+      addressClinic: "",
+      note: "",
     };
   }
   componentDidMount() {
     this.props.fetchAllDoctor();
+    this.props.getAllRequiredDoctorInfor();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.allDoctors !== this.props.allDoctors) {
-      let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+      let dataSelect = this.buildDataInputSelect(
+        this.props.allDoctors,
+        "USERS"
+      );
       this.setState({
         listDoctors: dataSelect,
       });
@@ -40,15 +56,35 @@ class ManageDoctor extends Component {
         listDoctors: dataSelect,
       });
     }
+    if (
+      prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor
+    ) {
+      let { resPayment, resPrice, resProvince } =
+        this.props.allRequiredDoctorInfor;
+      let dataPayment = this.buildDataInputSelect(resPayment);
+      let dataPrice = this.buildDataInputSelect(resPrice);
+      let dataProvince = this.buildDataInputSelect(resProvince);
+      this.setState({
+        listPayment: dataPayment,
+        listPrice: dataPrice,
+        listProvince: dataProvince,
+      });
+    }
   }
-  buildDataInputSelect = (inputData) => {
+  buildDataInputSelect = (inputData, type) => {
     let result = [];
     let { language } = this.props;
     if (inputData && inputData.length > 0) {
       inputData.map((item) => {
         let object = {};
-        let labelVi = `${item.lastName} ${item.firstName}`;
-        let labelEn = `${item.firstName} ${item.lastName}`;
+        let labelVi =
+          type === "USERS"
+            ? `${item.lastName} ${item.firstName}`
+            : item.valueVi;
+        let labelEn =
+          type === "USERS"
+            ? `${item.firstName} ${item.lastName}`
+            : item.valueEn;
         object.label = language === LANGUAGES.VI ? labelVi : labelEn;
         object.value = item.id;
         result.push(object);
@@ -103,27 +139,64 @@ class ManageDoctor extends Component {
     let { hasOldData } = this.state;
     return (
       <div className="manage-doctor-container">
-        <div className="manage-doctor-title">Tao them thong tin bac si</div>
+        <div className="manage-doctor-title">
+          <FormattedMessage id="admin.manage-doctor.title" />
+        </div>
         <div className="more-infor">
           <div className="content-left form-group">
-            <label>Chon bac si</label>
+            <label>
+              <FormattedMessage id="admin.manage-doctor.select-doctor" />
+            </label>
             <Select
               options={this.state.listDoctors}
               onChange={this.handleChangeSelect}
               value={this.state.selectedOption}
+              placeholder={"Chọn bác sĩ"}
             />
           </div>
           <div className="content-right">
-            <label>Thong tin gioi thieu</label>
+            <label>
+              <FormattedMessage id="admin.manage-doctor.intro" />
+            </label>
             <textarea
               className="form-control"
               rows="4"
               onChange={(event) => {
                 this.handleEditorChangeDesc(event);
               }}
-              value={this.state.description}>
-              llllllllllllllll
-            </textarea>
+              value={this.state.description}></textarea>
+          </div>
+        </div>
+        <div className="more-infor-extra-now">
+          <div className="col-4 form-group">
+            <label>Chon gia</label>
+            <Select options={this.state.listPrice} placeholder={"Chon gia"} />
+          </div>
+          <div className="col-4 form-group">
+            <label>Chon PTTT</label>
+            <Select
+              options={this.state.listPayment}
+              placeholder={"Chon PTTT"}
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label>Chon tinh</label>
+            <Select
+              options={this.state.listProvince}
+              placeholder={"Chon tinh"}
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label>Ten phong kham</label>
+            <input className="col-4" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Dia chi phong kham</label>
+            <input className="col-4" />
+          </div>
+          <div className="col-4 form-group">
+            <label>Note</label>
+            <input className="col-4" />
           </div>
         </div>
         <div className="manage-doctor-editor">
@@ -141,9 +214,13 @@ class ManageDoctor extends Component {
               : "create-content-doctor"
           }>
           {hasOldData === true ? (
-            <span>Lưu thông tin</span>
+            <span>
+              <FormattedMessage id="admin.manage-doctor.save" />
+            </span>
           ) : (
-            <span>Tạo thông tin</span>
+            <span>
+              <FormattedMessage id="admin.manage-doctor.add" />
+            </span>
           )}
         </button>
       </div>
@@ -155,6 +232,7 @@ const mapStateToProps = (state) => {
   return {
     allDoctors: state.admin.allDoctors,
     language: state.app.language,
+    allRequiredDoctorInfor: state.admin.allRequiredDoctorInfor,
   };
 };
 
@@ -162,6 +240,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDoctor: () => dispatch(actions.fetchAllDoctor()),
     saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctorAction(data)),
+    getAllRequiredDoctorInfor: () => dispatch(actions.getRequiredDoctorInfor()),
   };
 };
 
