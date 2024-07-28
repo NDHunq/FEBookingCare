@@ -41,7 +41,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-specialty",
-        link: "/department/manage-specialty",
+        link: "/system/manage-specialty",
       },
     ],
   },
