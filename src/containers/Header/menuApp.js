@@ -31,7 +31,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-clinic",
-        link: "/clinic/manage-clinic",
+        link: "/system/manage-clinic",
       },
     ],
   },
@@ -51,7 +51,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-handbook",
-        link: "/blog/manage-handbook",
+        link: "/system/manage-handbook",
       },
     ],
   },
