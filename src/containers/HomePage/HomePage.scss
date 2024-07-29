@@ -1,11 +1,12 @@
 .section-share {
     .slick-prev {
-        left      : -10px !important;
-        z-index   : 1000;
-        height    : 48px;
-        width     : 44px;
-        background: #fff !important;
-        border    : 2px solid #d7d7d7 !important;
+        left         : -10px !important;
+        z-index      : 1000;
+        height       : 48px;
+        width        : 44px;
+        background   : #fff !important;
+        border       : 2px solid #d7d7d7 !important;
+        border-radius: 7px;
 
         &:hover {
             background: #eceaea !important;
@@ -14,12 +15,13 @@
     }
 
     .slick-next {
-        right     : -10px !important;
-        z-index   : 1000;
-        height    : 48px;
-        width     : 44px;
-        background: #fff !important;
-        border    : 2px solid #d7d7d7 !important;
+        right        : -10px !important;
+        z-index      : 1000;
+        height       : 48px;
+        width        : 44px;
+        background   : #fff !important;
+        border       : 2px solid #d7d7d7 !important;
+        border-radius: 7px;
 
         &:hover {
             background: #eceaea !important;
@@ -88,6 +90,8 @@
                     background-position: center center;
                     background-size    : cover;
                     background-repeat  : no-repeat;
+                    border             : 1px solid #ddd;
+                    border-radius      : 7px;
 
                     &.section-specialty {
                         // background-image: url('../../assets/specialty/brook.jpg');
@@ -103,7 +107,7 @@
                     }
 
                     &.section-medical-facility {
-                        background-image: url('../../assets/specialty/hospital.png');
+                        // background-image: url('../../assets/specialty/hospital.png');
                     }
 
                     &.section-handbook {
@@ -170,8 +174,9 @@
         cursor : pointer;
 
         .customize-border {
-            border : 1px solid orange;
-            padding: 20px;
+            border       : 1px solid #ddd;
+            border-radius: 7px;
+            padding      : 20px;
         }
     }
 }
