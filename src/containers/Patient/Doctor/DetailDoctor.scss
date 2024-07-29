@@ -15,6 +15,8 @@
             height             : 120px;
             border-radius      : 50%;
             margin             : 10px 20px;
+
+
         }
 
         .content-right {
@@ -43,6 +45,8 @@
 
         .content-left {
             width: 50%;
+
+
         }
 
         .content-right {
@@ -68,4 +72,8 @@
     .comment-doctor {
         height: 50px;
     }
+}
+
+.no-schedule {
+    font-style: italic;
 }

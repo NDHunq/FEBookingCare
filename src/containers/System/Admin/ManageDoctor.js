@@ -186,6 +186,7 @@ class ManageDoctor extends Component {
         selectedPayment = "",
         selectedPrice = "",
         selectedProvince = "",
+        description = "",
         paymentId = "",
         priceId = "",
         provinceId = "",
@@ -197,6 +198,7 @@ class ManageDoctor extends Component {
         note = res.data.Doctor_infor.note;
         paymentId = res.data.Doctor_infor.paymentId;
         priceId = res.data.Doctor_infor.priceId;
+        description = res.data.Doctor_infor.description;
         provinceId = res.data.Doctor_infor.provinceId;
         specialtyId = res.data.Doctor_infor.specialtyId;
         selectedPayment = listPayment.find((item) => {
@@ -215,7 +217,7 @@ class ManageDoctor extends Component {
       this.setState({
         contentMarkdown: markdown.contentMarkdown,
         contentHTML: markdown.contentHTML,
-        description: markdown.Description,
+        description: markdown.description,
         hasOldData: true,
         nameClinic: nameClinic,
         addressClinic: addressClinic,
@@ -390,7 +392,9 @@ class ManageDoctor extends Component {
             </label>
             <Select
               options={this.state.listClinic}
-              placeholder={<FormattedMessage id="admin.manage-doctor.clinic" />}
+              placeholder={
+                <FormattedMessage id="admin.manage-doctor.select-clinic" />
+              }
               value={this.state.selectedClinic}
               onChange={this.handleChangeSelectDoctorInfor}
               name="selectedClinic"

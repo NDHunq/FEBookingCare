@@ -42,7 +42,52 @@ class DetailSpecialty extends Component {
       ) {
         let data = res.data;
         let arrDoctorId = [];
-        if (data && !_.isEmpty(data)) {
+        if (data && !_.isEmpty(res.data)) {
+          let arr = data.doctorSpecialty;
+          if (arr && arr.length > 0) {
+            arr.map((item) => {
+              arrDoctorId.push(item.doctorId);
+            });
+          }
+        }
+        let dataProvince = resProvince.data;
+        if (dataProvince && dataProvince.length > 0) {
+          dataProvince.unshift({
+            createAt: null,
+            keyMap: "ALL",
+            type: "PROVINCE",
+            valueEn: "All",
+            valueVi: "Toàn quốc",
+          });
+        }
+        this.setState({
+          arrDoctorId: arrDoctorId,
+          dataDetailSpecialty: res.data,
+          listProvince: dataProvince ? dataProvince : [],
+        });
+      }
+    }
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.language !== this.props.language) {
+    }
+  }
+  handleOnChangeSelect = async (event) => {
+    if (
+      this.props.match &&
+      this.props.match.params &&
+      this.props.match.params.id
+    ) {
+      let id = this.props.match.params.id;
+      let location = event.target.value;
+      let res = await getAllDetailSpecialtyById({
+        id: id,
+        location: location,
+      });
+      if (res && res.errCode === 0) {
+        let data = res.data;
+        let arrDoctorId = [];
+        if (data && !_.isEmpty(res.data)) {
           let arr = data.doctorSpecialty;
           if (arr && arr.length > 0) {
             arr.map((item) => {
@@ -53,16 +98,10 @@ class DetailSpecialty extends Component {
         this.setState({
           arrDoctorId: arrDoctorId,
           dataDetailSpecialty: res.data,
-          listProvince: resProvince.data,
         });
       }
     }
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.language !== this.props.language) {
-    }
-  }
-  handleOnChangeSelect = (event) => {};
+  };
 
   render() {
     let { arrDoctorId, dataDetailSpecialty, listProvince } = this.state;
@@ -102,6 +141,8 @@ class DetailSpecialty extends Component {
                       <ProfileDoctor
                         doctorId={item}
                         isShowDescriptionDoctor={true}
+                        isShowLinkDetail={true}
+                        isShowPrice={false}
                       />
                     </div>
                   </div>
