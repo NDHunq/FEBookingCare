@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { CommonUtils, LANGUAGES } from "../../../utils";
-import { Button, Modal } from "bootstrap";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 class RemedyModal extends Component {
   constructor(props) {
@@ -78,7 +78,6 @@ class RemedyModal extends Component {
               <input
                 className="form-control"
                 type="file"
-                value={this.state.email}
                 onChange={(event) => this.handleOnChangeImage(event)}
               />
             </div>

@@ -97,7 +97,7 @@ class BookingModal extends Component {
       reason: this.state.reason,
       date: this.props.dataTime.date,
       birthday: date,
-      setSelectedGender: this.state.selectedGender.value,
+      selectedGender: this.state.selectedGender.value,
       doctorID: this.state.doctorId,
       timeType: this.state.timeType,
       timeString: timeString,

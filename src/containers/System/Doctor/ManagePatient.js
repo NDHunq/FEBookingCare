@@ -31,6 +31,7 @@ class ManagePatient extends Component {
     let { user } = this.props;
     let { currentDate } = this.state;
     let formatedDate = new Date(currentDate).getTime();
+    console.log("getDataPatient", user.id + " - " + formatedDate);
 
     let res = await getAllPatientForDoctor({
       doctorId: user.id,
@@ -57,9 +58,10 @@ class ManagePatient extends Component {
     );
   };
   handleBtnConfirm = (item) => {
+    console.log("handleBtnConfirm", item);
     let data = {
-      doctorId: item.doctorId,
-      patientId: item.patientId,
+      doctorId: item.doctorID,
+      patientId: item.patientID,
       email: item.patientData.email,
       timeType: item.timeType,
       patientName: item.patientData.firstName,
@@ -83,11 +85,11 @@ class ManagePatient extends Component {
     let res = await postSendRemedy({
       email: dataChild.email,
       imgBase64: dataChild.imgBase64,
-      doctorId: dataChild.doctorId,
-      patientId: dataChild.patientId,
-      timeType: dataChild.timeType,
+      doctorId: dataModal.doctorId,
+      patientId: dataModal.patientId,
+      timeType: dataModal.timeType,
       language: this.props.language,
-      patientName: dataChild.patientName,
+      patientName: dataModal.patientName,
     });
     if (res && res.errCode === 0) {
       toast.success("Gửi hóa đơn thành công");
@@ -107,6 +109,7 @@ class ManagePatient extends Component {
   render() {
     let { dataPatient, isOpenRemedyModal, dataModal } = this.state;
     let { language } = this.props;
+
     return (
       <>
         <LoadingOverlay
@@ -135,43 +138,42 @@ class ManagePatient extends Component {
                       <th>Giới tính</th>
                       <th>Actions</th>
                     </tr>
-                    <tr>
-                      {dataPatient && dataPatient.length > 0 ? (
-                        dataPatient.map((item, index) => {
-                          let time =
-                            language === LANGUAGES.VI
-                              ? item.timeTypeDataPatient.valueVi
-                              : item.timeTypeDataPatient.valueEn;
-                          let gender =
-                            language === LANGUAGES.VI
-                              ? item.patientData.genderData.valueVi
-                              : item.patientData.genderData.valueEn;
 
-                          return (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>{item.timeTypeDataPatient.valueVi}</td>
-                              <td>{item.patientData.firstName}</td>
-                              <td>{item.patientData.address}</td>
-                              <td>{item.patientData.genderData.valueVi}</td>
-                              <td>
-                                <button
-                                  onClick={() => this.handleBtnConfirm(item)}
-                                  className="mp-btn-confirm">
-                                  Xác nhận
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <tr>
-                          <td colSpan="6" style={{ textAlign: "center" }}>
-                            No data
-                          </td>
-                        </tr>
-                      )}
-                    </tr>
+                    {dataPatient && dataPatient.length > 0 ? (
+                      dataPatient.map((item, index) => {
+                        let time =
+                          language === LANGUAGES.VI
+                            ? item.timeTypeDataPatient.valueVi
+                            : item.timeTypeDataPatient.valueEn;
+                        let gender =
+                          language === LANGUAGES.VI
+                            ? item.patientData.genderData.valueVi
+                            : item.patientData.genderData.valueEn;
+
+                        return (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{time}</td>
+                            <td>{item.patientData.firstName}</td>
+                            <td>{item.patientData.address}</td>
+                            <td>{gender}</td>
+                            <td>
+                              <button
+                                onClick={() => this.handleBtnConfirm(item)}
+                                className="mp-btn-confirm">
+                                Xác nhận
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan="6" style={{ textAlign: "center" }}>
+                          No data
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
